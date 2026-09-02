@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: My EC2 instance (value from user and default)
+
+Parameters:
+  InsTypeParam:
+    Type: String
+    Default: t3.micro
+  KeyPairParam:
+    Type: AWS::EC2::KeyPair::KeyName
+
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InsTypeParam
+      KeyName: !Ref KeyPairParam
+      ImageId: ami-0eb38b817b93460ac
+      Tags:
+        - Key: Name
+          Value: MyEC2Instance
+
+Outputs:
+  InstanceId:
+    Description: The ID of the EC2 instance
+    Value: !Ref MyEC2Instance
